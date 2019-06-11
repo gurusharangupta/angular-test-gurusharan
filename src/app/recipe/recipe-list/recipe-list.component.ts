@@ -7,7 +7,7 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeListComponent implements OnInit {
 
-  recipe: Recipe[] = [new Recipe('Paneer Tikka','North India','ss')];
+  recipes: Recipe[] = [new Recipe('sdf','sdf','sdf') ];
   constructor() { }
 
   ngOnInit() {
