@@ -12,11 +12,12 @@ import { RecipesComponent } from './recipe/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HighlightDirective } from './custom/highlight.directive';
+import { RenderHighlightDirective } from './custom/render-highlight.directive';
 
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective ],
+  declarations: [ AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective, RenderHighlightDirective ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
