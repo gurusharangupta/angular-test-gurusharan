@@ -15,11 +15,12 @@ import { HighlightDirective } from './custom/highlight.directive';
 import { RenderHighlightDirective } from './custom/render-highlight.directive';
 import { LoggingService } from './shared/logging.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { DropDownDirective } from './custom/drop-down.directive';
 
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective, RenderHighlightDirective ],
+  declarations: [ AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective, RenderHighlightDirective, DropDownDirective ],
   bootstrap:    [ AppComponent ],
   providers: [LoggingService, ShoppingListService]
 })
