@@ -14,7 +14,6 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { HighlightDirective } from './custom/highlight.directive';
 import { RenderHighlightDirective } from './custom/render-highlight.directive';
 import { LoggingService } from './shared/logging.service';
-import { RecipeService } from './recipe/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 
 
@@ -22,6 +21,6 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
   imports:      [ BrowserModule, FormsModule ],
   declarations: [ AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective, RenderHighlightDirective ],
   bootstrap:    [ AppComponent ],
-  providers: [LoggingService, RecipeService, ShoppingListService]
+  providers: [LoggingService, ShoppingListService]
 })
 export class AppModule { }
