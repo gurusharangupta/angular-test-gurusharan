@@ -13,11 +13,13 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { HighlightDirective } from './custom/highlight.directive';
 import { RenderHighlightDirective } from './custom/render-highlight.directive';
+import { LoggingService } from './shared/logging.service';
 
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule ],
   declarations: [ AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective, RenderHighlightDirective ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers: [LoggingService]
 })
 export class AppModule { }
