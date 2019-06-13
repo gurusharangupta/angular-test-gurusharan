@@ -9,16 +9,16 @@ private recipes: Recipe[] = [new Recipe(
    'Italian',
     'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
     [
-      new Ingredient('Coke',1),
-       new Ingredient('Fries',20)
+      new Ingredient('Toppings',1),
+       new Ingredient('Base',1)
       ]
     ),
   new Recipe(
-    'Fries', 
+    'Lasagna', 
     'Belgian',
      'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
      [
-      new Ingredient('Coke',1),
+      new Ingredient('Cheese',1),
        new Ingredient('Fries',20)
       ])];
   constructor() { }
