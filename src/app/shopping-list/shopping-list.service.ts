@@ -9,6 +9,12 @@ export class ShoppingListService {
   constructor() { }
 
   public addIngredient(ingredient: Ingredient) {
+    for (let ingredientIndex of this.ingredientList) {
+      if (ingredientIndex.name == ingredient.name) {
+        console.log('Ingredient already present');
+        return;
+      }
+    }
     this.ingredientList.push(ingredient);
     this.ingredientChanged.emit(this.ingredientList.slice());
   }
@@ -27,10 +33,14 @@ export class ShoppingListService {
     this.selectedIngredient.emit(ingredient);
   }
 
-  public deleteIngredient(ingredient: Ingredient){
- let indexOfIngredient = this.ingredientList.indexOf(ingredient);
- this.ingredientList.splice(indexOfIngredient,1);
- this.ingredientChanged.emit(this.ingredientList.slice());
+  public deleteIngredient(ingredient: Ingredient) {
+    for (let ingredientIndex of this.ingredientList) {
+      if (ingredientIndex.name == ingredient.name) {
+        let index = this.ingredientList.indexOf(ingredientIndex);
+        this.ingredientList.splice(index, 1);
+      }
+    }
+    this.ingredientChanged.emit(this.ingredientList.slice());
   }
 
 
