@@ -16,7 +16,7 @@ export class ShoppingEditComponent implements OnInit {
     this.shoppingListService.selectedIngredient.subscribe(
       (ingredient: Ingredient) => {
         this.nameInputRef.nativeElement.value = ingredient.name;
-        this.amountInputRef.nativeElement.value = ingredient.amount; 
+        this.amountInputRef.nativeElement.value = ingredient.amount;
       }
     )
   }
@@ -28,7 +28,11 @@ export class ShoppingEditComponent implements OnInit {
 
   }
 
+  onDeleteIngredient() {
+    let ingredient: Ingredient ={name: this.nameInputRef.nativeElement.value, amount: this.amountInputRef.nativeElement.value};
 
-  
+this.shoppingListService.deleteIngredient(ingredient);
+  }
+
 
 }

@@ -27,5 +27,11 @@ export class ShoppingListService {
     this.selectedIngredient.emit(ingredient);
   }
 
+  public deleteIngredient(ingredient: Ingredient){
+ let indexOfIngredient = this.ingredientList.indexOf(ingredient);
+ this.ingredientList.splice(indexOfIngredient,1);
+ this.ingredientChanged.emit(this.ingredientList.slice());
+  }
+
 
 }
