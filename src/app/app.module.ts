@@ -33,7 +33,10 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  declarations: [AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective, RenderHighlightDirective, DropDownDirective],
+  declarations: [AppComponent, HelloComponent, HeaderComponent, RecipeListComponent,
+    RecipeDetailComponent, RecipeItemComponent, RecipesComponent,
+    ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
+    RenderHighlightDirective, DropDownDirective],
   bootstrap: [AppComponent],
   providers: [LoggingService]
 })
