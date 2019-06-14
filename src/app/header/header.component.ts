@@ -7,7 +7,7 @@ import { Component, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   selectedPage = 'Recipe';
-  //@Output() routeClick = new EventEmitter<string>();
+  
   constructor() { }
 
   ngOnInit() {

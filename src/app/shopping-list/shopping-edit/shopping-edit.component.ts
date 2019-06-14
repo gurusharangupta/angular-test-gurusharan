@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 @Component({
@@ -13,6 +13,12 @@ export class ShoppingEditComponent implements OnInit {
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
+    this.shoppingListService.selectedIngredient.subscribe(
+      (ingredient: Ingredient) => {
+        this.nameInputRef.nativeElement.value = ingredient.name;
+        this.amountInputRef.nativeElement.value = ingredient.amount; 
+      }
+    )
   }
 
   onAddIngredient() {
@@ -21,5 +27,8 @@ export class ShoppingEditComponent implements OnInit {
     this.shoppingListService.addIngredient(new Ingredient(nameConst, amountConst));
 
   }
+
+
+  
 
 }
