@@ -19,8 +19,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: '', component: HelloComponent },
-  { path: 'recipes', component: RecipesComponent },
-  { path: 'recipes/:id', component: RecipeItemComponent },
+  {
+    path: 'recipes', component: RecipesComponent, children: [
+      { path: ':name', component: RecipeDetailComponent }
+    ]
+  },
   { path: 'shopping', component: ShoppingListComponent }
 
 ]
