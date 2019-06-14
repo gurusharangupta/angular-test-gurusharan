@@ -14,14 +14,23 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { HighlightDirective } from './custom/highlight.directive';
 import { RenderHighlightDirective } from './custom/render-highlight.directive';
 import { LoggingService } from './shared/logging.service';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { DropDownDirective } from './custom/drop-down.directive';
+import { Routes, RouterModule } from '@angular/router';
 
+const appRoutes: Routes = [
+  { path: '', component: HelloComponent },
+  { path: 'recipes', component: RecipesComponent },
+  { path: 'shopping', component: ShoppingListComponent }
 
+]
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective, RenderHighlightDirective, DropDownDirective ],
-  bootstrap:    [ AppComponent ],
-  providers: [LoggingService, ShoppingListService]
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
+  ],
+  declarations: [AppComponent, HelloComponent, HeaderComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent, RecipesComponent, ShoppingListComponent, ShoppingEditComponent, HighlightDirective, RenderHighlightDirective, DropDownDirective],
+  bootstrap: [AppComponent],
+  providers: [LoggingService]
 })
 export class AppModule { }

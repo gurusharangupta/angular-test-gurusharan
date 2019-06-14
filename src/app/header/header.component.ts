@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,21 +6,21 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-selectedPage='Recipe';
-@Output() routeClick = new EventEmitter<string>();
+  selectedPage = 'Recipe';
+  //@Output() routeClick = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit() {
   }
 
-  onRecipeClick(){
-this.routeClick.emit('Recipe');
-this.selectedPage = 'Recipe';
+  onRecipeClick() {
+    //this.routeClick.emit('Recipe');
+    this.selectedPage = 'Recipe';
   }
 
-   onShoppingClick(){
-this.routeClick.emit('Shopping');
-this.selectedPage = 'Shopping';
+  onShoppingClick() {
+    //this.routeClick.emit('Shopping');
+    this.selectedPage = 'Shopping';
   }
 
 

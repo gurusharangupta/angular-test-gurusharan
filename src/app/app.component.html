@@ -3,8 +3,9 @@
     <app-header (routeClick)="onPageClick($event)"></app-header>
   </div>
   <div class="row">
-  <app-recipes *ngIf="loadPage === 'Recipe'"></app-recipes>
+    <router-outlet></router-outlet>
+  <!-- <app-recipes *ngIf="loadPage === 'Recipe'"></app-recipes>
   <app-shopping-list *ngIf="loadPage === 'Shopping'"></app-shopping-list>
- 
+ -->
   </div>
 </div>
