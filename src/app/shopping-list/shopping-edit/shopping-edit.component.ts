@@ -1,21 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   ingredientEditSubscription: Subscription;
-  constructor(private shoppingListService: ShoppingListService) { }
+  editMode = false;
+  editItemNumber: number;
+  editedItem: Ingredient;
+  @ViewChild('f', { static: false }) slForm: NgForm;
+    constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
-this.shoppingListService.selectedIngredient
+    this.ingredientEditSubscription = this.shoppingListService.selectedIngredient.subscribe(
+      (index: number) => {
+        this.editItemNumber = index;
+        this.editMode = true;
+        this.editedItem = this.shoppingListService.getIngredientByIndex(index);
+
+      }
+    );
   }
 
   onAddIngredient(form: NgForm) {
@@ -25,8 +36,13 @@ this.shoppingListService.selectedIngredient
   }
 
   onDeleteIngredient() {
-  
+
   }
+
+  ngOnDestroy() {
+    this.ingredientEditSubscription.unsubscribe();
+  }
+
 
 
 }

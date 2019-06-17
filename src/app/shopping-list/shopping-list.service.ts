@@ -39,5 +39,9 @@ export class ShoppingListService {
     this.ingredientChanged.next(this.ingredientList.slice());
   }
 
+  public getIngredientByIndex(index: number){
+    return this.ingredientList[index];
+  }
+
 
 }
