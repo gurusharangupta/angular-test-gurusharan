@@ -34,11 +34,7 @@ export class RecipeService {
     this.shoppingListService.addIngredients(ingredient);
   }
 
-  public getRecipeFromName(name: string){
-    for(let recipe of this.recipes){
-      if(name == recipe.name){
-        return recipe;
-      }
-    }
+  public getRecipeById(index: number){
+   return this.recipes.slice()[index];
   }
 }

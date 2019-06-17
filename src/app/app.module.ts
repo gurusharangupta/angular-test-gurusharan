@@ -16,12 +16,13 @@ import { RenderHighlightDirective } from './custom/render-highlight.directive';
 import { LoggingService } from './shared/logging.service';
 import { DropDownDirective } from './custom/drop-down.directive';
 import { Routes, RouterModule } from '@angular/router';
+import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 
 const appRoutes: Routes = [
   { path: '', component: HelloComponent },
   {
     path: 'recipes', component: RecipesComponent, children: [
-      { path: ':name', component: RecipeDetailComponent }
+      { path: ':id', component: RecipeDetailComponent }
     ]
   },
   { path: 'shopping', component: ShoppingListComponent }
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
   declarations: [AppComponent, HelloComponent, HeaderComponent, RecipeListComponent,
     RecipeDetailComponent, RecipeItemComponent, RecipesComponent,
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
-    RenderHighlightDirective, DropDownDirective],
+    RenderHighlightDirective, DropDownDirective, RecipeEditComponent],
   bootstrap: [AppComponent],
   providers: [LoggingService]
 })
