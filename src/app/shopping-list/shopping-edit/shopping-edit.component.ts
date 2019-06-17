@@ -1,6 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
@@ -8,30 +11,21 @@ import { ShoppingListService } from '../shopping-list.service';
 })
 export class ShoppingEditComponent implements OnInit {
 
-  @ViewChild('nameInput', { static: false }) nameInputRef: ElementRef;
-  @ViewChild('amountInput', { static: false }) amountInputRef: ElementRef;
+  ingredientEditSubscription: Subscription;
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
-    this.shoppingListService.selectedIngredient.subscribe(
-      (ingredient: Ingredient) => {
-        this.nameInputRef.nativeElement.value = ingredient.name;
-        this.amountInputRef.nativeElement.value = ingredient.amount;
-      }
-    )
+this.shoppingListService.selectedIngredient
   }
 
-  onAddIngredient() {
-    const nameConst = this.nameInputRef.nativeElement.value;
-    const amountConst = this.amountInputRef.nativeElement.value;
-    this.shoppingListService.addIngredient(new Ingredient(nameConst, amountConst));
+  onAddIngredient(form: NgForm) {
+    const valueConst = form.value;
+    this.shoppingListService.addIngredient(new Ingredient(valueConst.name, valueConst.amount));
 
   }
 
   onDeleteIngredient() {
-    let ingredient: Ingredient ={name: this.nameInputRef.nativeElement.value, amount: this.amountInputRef.nativeElement.value};
-
-this.shoppingListService.deleteIngredient(ingredient);
+  
   }
 
 

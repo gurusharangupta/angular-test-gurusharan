@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="col-xs-7">
 				<ul class="list-group">
-					<a class="list-group-item" *ngFor="let ingredient of ingredientList" (click)="onIngredientClick(ingredient)">
+					<a class="list-group-item" *ngFor="let ingredient of ingredientList;let i = index" (click)="onIngredientClick(index)">
 						{{ingredient.name}}({{ingredient.amount}})
 					</a>
 				</ul>

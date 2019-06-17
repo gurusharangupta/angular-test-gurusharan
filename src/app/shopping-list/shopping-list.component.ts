@@ -21,8 +21,8 @@ export class ShoppingListComponent implements OnInit {
     )
   }
 
-  onIngredientClick(ingredient: Ingredient) {
-    this.shoppingListService.editIngredient(ingredient);
+  onIngredientClick(index: number) {
+    this.shoppingListService.selectedIngredient.next(index);
   }
 
 }
