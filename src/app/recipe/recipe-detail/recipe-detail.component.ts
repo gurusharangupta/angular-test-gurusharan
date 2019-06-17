@@ -1,7 +1,7 @@
 import { RecipeService } from './../recipe.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from '../recipe.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
@@ -15,8 +15,8 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit() {
      this.recipe = this.recipeService.getRecipeFromName(this.routes.snapshot.params['name']);
      this.routes.params.subscribe(
-       (recipe: Recipe) => {
-         this.recipe = recipe;
+       (params: Params) => {
+         this.recipe = this.recipeService.getRecipeFromName(this.routes.snapshot.params['name']);
        }
      );
    
