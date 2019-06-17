@@ -9,21 +9,21 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class RecipeDetailComponent implements OnInit {
 
-@Input() recipe: Recipe;
+  @Input() recipe: Recipe;
   constructor(private recipeService: RecipeService, private routes: ActivatedRoute) { }
 
   ngOnInit() {
-     this.recipe = this.recipeService.getRecipeFromName(this.routes.snapshot.params['name']);
-     this.routes.params.subscribe(
-       (params: Params) => {
-         this.recipe = this.recipeService.getRecipeFromName(this.routes.snapshot.params['name']);
-       }
-     );
-   
+    this.recipe = this.recipeService.getRecipeFromName(this.routes.snapshot.params['name']);
+    this.routes.params.subscribe(
+      (params: Params) => {
+        this.recipe = this.recipeService.getRecipeFromName(this.routes.snapshot.params['name']);
+      }
+    );
+
   }
 
-  addIngredientsToShopping(){
-this.recipeService.addIngredientsForShopping(this.recipe.ingredient);
+  addIngredientsToShopping() {
+    this.recipeService.addIngredientsForShopping(this.recipe.ingredient);
   }
 
 }
