@@ -26,20 +26,17 @@ export class ShoppingListService {
     this.ingredientChanged.next(this.ingredientList.slice());
     console.log(this.ingredientList);
   }
-
-  
-
-  public deleteIngredient(ingredient: Ingredient) {
-    for (let ingredientIndex of this.ingredientList) {
-      if (ingredientIndex.name == ingredient.name) {
-        let index = this.ingredientList.indexOf(ingredientIndex);
-        this.ingredientList.splice(index, 1);
-      }
-    }
+  public editIngredient(index: number, ingredient: Ingredient) {
+    this.ingredientList[index] = ingredient;
     this.ingredientChanged.next(this.ingredientList.slice());
   }
 
-  public getIngredientByIndex(index: number){
+  public deleteIngredient(index: number) {
+    this.ingredientList.splice(index, 1);
+    this.ingredientChanged.next(this.ingredientList.slice());
+  }
+
+  public getIngredientByIndex(index: number) {
     return this.ingredientList[index];
   }
 
