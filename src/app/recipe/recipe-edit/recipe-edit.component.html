@@ -6,10 +6,10 @@
 					<button type="submit" 
           class="btn btn-success"
            [disabled]="!recipeForm.valid"
-           [routerLink]="">
+           >
            {{editMode === true?'Update':'Save'}}
            </button>
-          <button type="button" class="btn btn-danger">Cancel</button>
+          <button type="button" class="btn btn-danger" [routerLink]="['../']">Cancel</button>
         </div>
       </div>
 
