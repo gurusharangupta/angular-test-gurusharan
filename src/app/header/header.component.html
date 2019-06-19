@@ -19,13 +19,19 @@
                Shopping List
              </a>
           </li>
-           <li class="nav-item dropdown">
+           <li class="nav-item dropdown" appDropDown>
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Manage<span class="caret"></span>
         </a>
+        <ul class="dropdown-menu">
+      <li><a style="cursor: pointer;" (click)="addIngredientsToShopping()">To Shopping</a></li>
+      <li><a [routerLink]="['edit']">Edit Recipe</a></li>
+      <li><a (click)="onDelete()">Delete Recipe</a></li>
+    </ul>
       </li>
     </ul>
  </div>
 </nav>
   </div>
 </div>
+

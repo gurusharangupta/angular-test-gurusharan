@@ -18,6 +18,9 @@ import { LoggingService } from './shared/logging.service';
 import { DropDownDirective } from './custom/drop-down.directive';
 import { Routes, RouterModule } from '@angular/router';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
+import { DataStorageService } from './shared/data-storage.service';
+import { RecipeService } from './recipe/recipe.service';
+import { ShoppingListService } from './shopping-list/shopping-list.service';
 
 const appRoutes: Routes = [
   { path: '', component: HelloComponent },
@@ -45,6 +48,6 @@ const appRoutes: Routes = [
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
     RenderHighlightDirective, DropDownDirective, RecipeEditComponent],
   bootstrap: [AppComponent],
-  providers: [LoggingService]
+  providers: [LoggingService, DataStorageService, ShoppingListService, RecipeService]
 })
 export class AppModule { }

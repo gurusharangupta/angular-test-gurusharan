@@ -10,25 +10,25 @@ import { map } from 'rxjs/operators';
 export class RecipeService implements OnInit {
 
   public recipeChanged = new Subject<Recipe[]>();
-  private recipes: Recipe[] = [];
+  private recipes: Recipe[] = [new Recipe(
+      'Pizza',
+      'Italian',
+      'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
+      [
+        new Ingredient('Toppings', 1),
+        new Ingredient('Base', 1)
+      ]
+    ),
+    new Recipe(
+      'Lasagna',
+      'Belgian',
+      'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
+      [
+        new Ingredient('Cheese', 1),
+        new Ingredient('Fries', 20)
+      ])];
 
-  // new Recipe(
-  //     'Pizza',
-  //     'Italian',
-  //     'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
-  //     [
-  //       new Ingredient('Toppings', 1),
-  //       new Ingredient('Base', 1)
-  //     ]
-  //   ),
-  //   new Recipe(
-  //     'Lasagna',
-  //     'Belgian',
-  //     'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
-  //     [
-  //       new Ingredient('Cheese', 1),
-  //       new Ingredient('Fries', 20)
-  //     ])
+  
 
   ngOnInit() {
     this.fetchRecipe();
@@ -36,7 +36,7 @@ export class RecipeService implements OnInit {
   constructor(private shoppingListService: ShoppingListService, private http: HttpClient) { }
 
   public getRecipes() {
-    this.fetchRecipe();
+    
     return this.recipes.slice();
   }
 
@@ -59,25 +59,19 @@ export class RecipeService implements OnInit {
     );
   }
 
-  private fetchRecipe() {
-    this.http.get<{ [key: string]: Recipe }>('https://test-backend-8118b.firebaseio.com/posts.json')
+  public fetchRecipe() {
+    return this.http.get<{ [key: string]: Recipe }>('https://test-backend-8118b.firebaseio.com/posts.json')
       .pipe(map(responseData => {
         const postArray: Recipe[] = [];
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
+            console.log(responseData[key]);
             postArray.push(responseData[key]);
           }
         }
-        console.log(postArray)
         return postArray;
-      }))
-      .subscribe(
-        (recipe: Recipe[]) => {
-
-          this.recipes = recipe;
-          console.log(this.recipes);
-        }
-      )
+      }));
+      
   }
 
   public updateRecipe(index: number, recipe: Recipe) {
