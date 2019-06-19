@@ -1,5 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 
+import { DataStorageService } from '../shared/data-storage.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,8 +9,8 @@ import { Component, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   selectedPage = 'Recipe';
-  
-  constructor() { }
+
+  constructor(private dataStorgeService: DataStorageService) { }
 
   ngOnInit() {
   }
@@ -21,6 +23,14 @@ export class HeaderComponent implements OnInit {
   onShoppingClick() {
     //this.routeClick.emit('Shopping');
     this.selectedPage = 'Shopping';
+  }
+
+  storeRecipe() {
+    this.dataStorgeService.storeRecipes();
+  }
+
+  fetchRecipe(){
+    this.dataStorgeService.fetchRecipes();
   }
 
 
