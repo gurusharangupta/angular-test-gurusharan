@@ -55,7 +55,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
-
+ hideAlert(){
+   this.status = '';
+   this.alertType = 'alert ';
+ }
 
 
 }
