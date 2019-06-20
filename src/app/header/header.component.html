@@ -35,11 +35,12 @@
 </nav>
  </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="status != ''">
 	<div class="col-xs-12">
-<div class="alert alert-success" role="alert" *ngIf="true">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Success!</strong> You have been signed in successfully!
+<div [className]="alertType" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+  </button>
+  <strong>{{status}}!</strong> {{statusMessage}}
 </div>
   </div>
 </div>

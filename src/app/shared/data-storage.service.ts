@@ -4,16 +4,18 @@ import { HttpClient } from '@angular/common/http';
 import { RecipeService } from '../recipe/recipe.service';
 import { Recipe } from '../recipe/recipe.model';
 import { map, tap } from 'rxjs/operators';
+import { AlertService } from './alert.service';
 
 @Injectable()
 export class DataStorageService {
 
-  constructor(private http: HttpClient, private recipeService: RecipeService) { }
+  constructor(private http: HttpClient, private recipeService: RecipeService, private alertService: AlertService) { }
 
   storeRecipes() {
     const recipes: Recipe[] = this.recipeService.getRecipes();
     this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json', recipes).subscribe(
       (response => {
+        this.alertService.setAlert('danger','Your Data has been stored');
         console.log('Store Recipe: ' + JSON.stringify(response));
       })
     );

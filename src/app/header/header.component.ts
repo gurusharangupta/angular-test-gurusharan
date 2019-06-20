@@ -1,18 +1,32 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy } from '@angular/core';
 
 import { DataStorageService } from '../shared/data-storage.service';
+import { AlertService } from '../shared/alert.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   selectedPage = 'Recipe';
-
-  constructor(private dataStorgeService: DataStorageService) { }
+  statusMessage: string = '';
+  status: string = '';
+  alertType: string = 'alert ';
+  subscription: Subscription
+  constructor(private dataStorgeService: DataStorageService, private alertService: AlertService) {
+    this.subscription = this.alertService.showAlert.subscribe(
+      (alert) => {
+        this.statusMessage = alert.message;
+        this.status = alert.status;
+        this.alertType += 'alert-info alert-dismissible fade in';
+      }
+    );
+   }
 
   ngOnInit() {
+    
   }
 
   onRecipeClick() {
@@ -29,14 +43,17 @@ export class HeaderComponent implements OnInit {
     this.dataStorgeService.storeRecipes();
   }
 
-  fetchRecipe(){
+  fetchRecipe() {
     this.dataStorgeService.fetchRecipes().subscribe();
-        
+
   }
 
-   resetRecipe(){
+  resetRecipe() {
     this.dataStorgeService.resetRecipes().subscribe();
-        
+
+  }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 
