@@ -22,6 +22,7 @@ import { DataStorageService } from './shared/data-storage.service';
 import { RecipeService } from './recipe/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeResolverService } from './recipe/recipe-resolver.service';
+import { AlertService } from './shared/alert.service';
 
 const appRoutes: Routes = [
   { path: '', component: HelloComponent },
@@ -49,6 +50,6 @@ const appRoutes: Routes = [
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
     RenderHighlightDirective, DropDownDirective, RecipeEditComponent],
   bootstrap: [AppComponent],
-  providers: [LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService]
+  providers: [LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService, AlertService]
 })
 export class AppModule { }
