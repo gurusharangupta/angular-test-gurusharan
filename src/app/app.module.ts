@@ -21,14 +21,15 @@ import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component'
 import { DataStorageService } from './shared/data-storage.service';
 import { RecipeService } from './recipe/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { RecipeResolverService } from './recipe/recipe-resolver.service';
 
 const appRoutes: Routes = [
   { path: '', component: HelloComponent },
   {
     path: 'recipes', component: RecipesComponent, children: [
       { path: 'new', component: RecipeEditComponent},
-       { path: ':id', component: RecipeDetailComponent },
-      { path: ':id/edit', component: RecipeEditComponent}
+       { path: ':id', component: RecipeDetailComponent, resolve :[RecipeResolverService] },
+      { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipeResolverService]}
       ,
     ]
   },
@@ -48,6 +49,6 @@ const appRoutes: Routes = [
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
     RenderHighlightDirective, DropDownDirective, RecipeEditComponent],
   bootstrap: [AppComponent],
-  providers: [LoggingService, DataStorageService, ShoppingListService, RecipeService]
+  providers: [LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService]
 })
 export class AppModule { }

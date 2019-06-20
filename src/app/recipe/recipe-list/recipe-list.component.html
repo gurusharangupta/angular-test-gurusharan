@@ -9,7 +9,8 @@
     <app-recipe-item 
     *ngFor="let recipeElement of recipes; let i = index"
     (click)="onSelected(i)"
-    [recipe]="recipeElement"
-    ></app-recipe-item>
+    [recipe]="recipeElement">
+    </app-recipe-item>
+    <div *ngIf="recipes?.length === 0">No Recipe Found</div>
   </div>
 </div>
