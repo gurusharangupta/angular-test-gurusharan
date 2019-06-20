@@ -34,6 +34,11 @@ export class HeaderComponent implements OnInit {
         
   }
 
+   resetRecipe(){
+    this.dataStorgeService.resetRecipes().subscribe();
+        
+  }
+
 
 
 }

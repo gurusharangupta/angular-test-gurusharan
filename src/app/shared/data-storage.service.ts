@@ -19,6 +19,15 @@ export class DataStorageService {
     );
   }
 
+  resetRecipes() {
+    const recipes: Recipe[] = this.recipeService.getRecipesReset();
+    this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json', recipes).subscribe(
+      (response => {
+        console.log('Store Recipe: ' + JSON.stringify(response));
+      })
+    );
+  }
+
   public fetchRecipes() {
     return this.http.get<Recipe[]>('https://test-backend-8118b.firebaseio.com/recipes.json')
       .pipe(
@@ -31,7 +40,7 @@ export class DataStorageService {
           console.log('Fetch recipe: ' + JSON.stringify(recipes));
           this.recipeService.setRecipes(recipes);
         }));
-     
+
 
   }
 

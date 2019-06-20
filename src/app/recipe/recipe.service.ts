@@ -10,23 +10,23 @@ import { map } from 'rxjs/operators';
 export class RecipeService implements OnInit {
 
   public recipeChanged = new Subject<Recipe[]>();
-  // private recipes: Recipe[] = [new Recipe(
-  //   'Pizza',
-  //   'Italian',
-  //   'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
-  //   [
-  //     new Ingredient('Toppings', 1),
-  //     new Ingredient('Base', 1)
-  //   ]
-  // ),
-  // new Recipe(
-  //   'Lasagna',
-  //   'Belgian',
-  //   'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
-  //   [
-  //     new Ingredient('Cheese', 1),
-  //     new Ingredient('Fries', 20)
-  //   ])];
+  private recipesReset: Recipe[] = [new Recipe(
+    'Pizza',
+    'Italian',
+    'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
+    [
+      new Ingredient('Toppings', 1),
+      new Ingredient('Base', 1)
+    ]
+  ),
+  new Recipe(
+    'Lasagna',
+    'Belgian',
+    'https://i2.wp.com/www.staceyhomemaker.com/wp-content/uploads/2019/01/Vegan-Keto-Recipes-.jpg?resize=683%2C1024&ssl=1',
+    [
+      new Ingredient('Cheese', 1),
+      new Ingredient('Fries', 20)
+    ])];
 
   private recipes: Recipe[] = [];
 
@@ -40,6 +40,11 @@ export class RecipeService implements OnInit {
   public getRecipes() {
 
     return this.recipes.slice();
+  }
+
+  public getRecipesReset() {
+
+    return this.recipesReset.slice();
   }
 
   public setRecipes(recipes: Recipe[]) {
