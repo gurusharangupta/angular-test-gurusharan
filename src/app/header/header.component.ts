@@ -15,20 +15,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   status: string = '';
   alertType: string = 'alert ';
   subscription: Subscription
-  constructor(private dataStorgeService: DataStorageService, private alertService: AlertService) {
-    this.subscription = this.alertService.showAlert.subscribe(
-      (alert) => {
-        this.statusMessage = alert.message;
-        this.status = alert.status;
-        if(this.status == 'Success')  this.alertType += 'alert-success alert-dismissible fade in';
-         if(this.status == 'Error')  this.alertType += 'alert-danger alert-dismissible fade in';
-       
-      }
-    );
-   }
+  constructor(private dataStorgeService: DataStorageService, private alertService: AlertService) { }
 
   ngOnInit() {
-    
+    this.subscription = this.alertService.showAlert.subscribe(
+      (alert) => {
+
+        this.statusMessage = alert.message;
+        this.status = alert.status;
+        if (this.status == 'Success') this.alertType += 'alert-success alert-dismissible fade in';
+        if (this.status == 'Error') this.alertType += 'alert-danger alert-dismissible fade in';
+
+      }
+    );
   }
 
   onRecipeClick() {
@@ -51,16 +50,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   resetRecipe() {
-    this.dataStorgeService.resetRecipes().subscribe();
+    this.dataStorgeService.resetRecipes();
 
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
- hideAlert(){
-   this.status = '';
-   this.alertType = 'alert ';
- }
+  hideAlert() {
+    this.status = '';
+    this.alertType = 'alert ';
+  }
 
 
 }

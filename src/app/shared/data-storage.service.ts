@@ -32,8 +32,10 @@ export class DataStorageService {
 
   resetRecipes() {
     const recipes: Recipe[] = this.recipeService.getRecipesReset();
-    this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json', recipes).subscribe(
+    this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json', recipes).
+    subscribe(
       (response) => {
+        this.alertService.setAlert('Success', 'Your recipe has been reset');
         console.log('Store Recipe: ' + JSON.stringify(response));
       },
       (error) => {

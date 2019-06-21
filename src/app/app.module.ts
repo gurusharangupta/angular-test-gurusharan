@@ -50,6 +50,6 @@ const appRoutes: Routes = [
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
     RenderHighlightDirective, DropDownDirective, RecipeEditComponent],
   bootstrap: [AppComponent],
-  providers: [LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService, AlertService]
+  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService, ]
 })
 export class AppModule { }

@@ -22,12 +22,10 @@ export class RecipeDetailComponent implements OnInit {
         this.recipe = this.recipeService.getRecipeById(+this.routes.snapshot.params['id']);
         if(this.recipe == null){
            this.alertService.setAlert('Error','Recipe not found');
-           console.log('recipe not found');
            this.router.navigate(['../'],{relativeTo: this.routes});
         }
       }
     );
-
   }
 
   addIngredientsToShopping() {
