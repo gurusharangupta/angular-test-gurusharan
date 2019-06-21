@@ -5,11 +5,12 @@ import { Recipe } from '../../recipe.model';
   selector: 'app-recipe-item',
   templateUrl: './recipe-item.component.html',
   styleUrls: ['./recipe-item.component.css'],
-  providers:[]
+  providers: []
 })
 export class RecipeItemComponent implements OnInit {
 
-@Input() recipe: Recipe;
+  @Input() recipe: Recipe;
+  @Input() index: number;
   constructor() { }
 
   ngOnInit() {
@@ -17,6 +18,6 @@ export class RecipeItemComponent implements OnInit {
     //this.recipe = recipes[this.activatedRoute.snapshot.params['id']];
   }
 
- 
+
 
 }
