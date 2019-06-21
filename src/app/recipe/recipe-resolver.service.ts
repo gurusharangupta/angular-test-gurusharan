@@ -9,17 +9,13 @@ import { RecipeService } from './recipe.service';
 export class RecipeResolverService implements Resolve<Recipe[]>{
 
   constructor(private dataStorageService: DataStorageService,
-    private recipeService: RecipeService,
-    private routes: ActivatedRoute,
-    private router: Router) { }
+    private recipeService: RecipeService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const recipes: Recipe[] = this.recipeService.getRecipes();
 
-
-
     if (recipes.length === 0) {
-      const id = +this.routes.snapshot.params['id'];
+     // const id = +this.routes.snapshot.params['id'];
       return this.dataStorageService.fetchRecipes();
     } else {
       return recipes;
