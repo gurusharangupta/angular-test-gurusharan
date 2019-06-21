@@ -13,21 +13,21 @@ export class DataStorageService {
 
   storeRecipes() {
     const recipes: Recipe[] = this.recipeService.getRecipes();
-    this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json', 
-    recipes,
-    {
-      headers: new HttpHeaders({'Cutom-Header': 'Hello'})
-    }
-    ).subscribe(
-      (response) => {
-        this.alertService.setAlert('Success','Your Data has been stored');
-        console.log('Store Recipe: ' + JSON.stringify(response));
-      },
-      (error) => {
-         this.alertService.setAlert('Error','Error storing recipes');
-        
-      }
-    );
+    this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json',
+      recipes,
+      {
+        headers: new HttpHeaders({ 'Cutom-Header': 'Hello' })
+      })
+      .subscribe(
+        (response) => {
+          this.alertService.setAlert('Success', 'Your Data has been stored');
+          console.log('Store Recipe: ' + JSON.stringify(response));
+        },
+        (error) => {
+          this.alertService.setAlert('Error', 'Error storing recipes');
+
+        }
+      );
   }
 
   resetRecipes() {
@@ -37,17 +37,19 @@ export class DataStorageService {
         console.log('Store Recipe: ' + JSON.stringify(response));
       },
       (error) => {
-         this.alertService.setAlert('Error','Error Reseting recipes');
-        
+        this.alertService.setAlert('Error', 'Error Reseting recipes');
+
       }
     );
   }
 
   public fetchRecipes() {
+    let searchParams = new HttpParams();
+    searchParams = searchParams.append('print', 'pretty');
     return this.http.get<Recipe[]>('https://test-backend-8118b.firebaseio.com/recipes.json',
-     {
-      params: new HttpParams().set('print','pretty')
-    })
+      {
+        params: searchParams
+      })
       .pipe(
         map(recipes => {
           return recipes.map(recipe => {
