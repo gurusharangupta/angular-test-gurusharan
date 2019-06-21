@@ -20,7 +20,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       (alert) => {
         this.statusMessage = alert.message;
         this.status = alert.status;
-        this.alertType += 'alert-info alert-dismissible fade in';
+        if(this.status == 'Success')  this.alertType += 'alert-success alert-dismissible fade in';
+         if(this.status == 'Error')  this.alertType += 'alert-danger alert-dismissible fade in';
+       
       }
     );
    }

@@ -17,7 +17,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   constructor(private recipeService: RecipeService, private activatedRoute: ActivatedRoute, private router: Router, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    this.dataStorageService.fetchRecipes().subscribe();
+    this.dataStorageService.fetchRecipes().subscribe( 
+      recipes => {},
+      error =>  {console.log('No data found');}
+      );
     this.subscription = this.recipeService.recipeChanged.subscribe(
       (recipes: Recipe[]) => {
         this.recipes = recipes;

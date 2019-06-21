@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { RecipeService } from '../recipe/recipe.service';
 import { Recipe } from '../recipe/recipe.model';
@@ -13,25 +13,41 @@ export class DataStorageService {
 
   storeRecipes() {
     const recipes: Recipe[] = this.recipeService.getRecipes();
-    this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json', recipes).subscribe(
-      (response => {
-        this.alertService.setAlert('danger','Your Data has been stored');
+    this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json', 
+    recipes,
+    {
+      headers: new HttpHeaders({'Cutom-Header': 'Hello'})
+    }
+    ).subscribe(
+      (response) => {
+        this.alertService.setAlert('Success','Your Data has been stored');
         console.log('Store Recipe: ' + JSON.stringify(response));
-      })
+      },
+      (error) => {
+         this.alertService.setAlert('Error','Error storing recipes');
+        
+      }
     );
   }
 
   resetRecipes() {
     const recipes: Recipe[] = this.recipeService.getRecipesReset();
     this.http.put('https://test-backend-8118b.firebaseio.com/recipes.json', recipes).subscribe(
-      (response => {
+      (response) => {
         console.log('Store Recipe: ' + JSON.stringify(response));
-      })
+      },
+      (error) => {
+         this.alertService.setAlert('Error','Error Reseting recipes');
+        
+      }
     );
   }
 
   public fetchRecipes() {
-    return this.http.get<Recipe[]>('https://test-backend-8118b.firebaseio.com/recipes.json')
+    return this.http.get<Recipe[]>('https://test-backend-8118b.firebaseio.com/recipes.json',
+     {
+      params: new HttpParams().set('print','pretty')
+    })
       .pipe(
         map(recipes => {
           return recipes.map(recipe => {
