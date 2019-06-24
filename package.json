@@ -12,6 +12,7 @@
     "@angular/router": "8.0.1",
     "bootstrap": "3.4.1",
     "core-js": "2.6.9",
+    "cors": "^2.8.5",
     "jquery": "3.4.1",
     "popper.js": "1.15.0",
     "rxjs": "6.5.2",
