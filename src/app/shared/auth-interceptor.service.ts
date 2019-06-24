@@ -8,7 +8,7 @@ export class AuthInterceptorService implements HttpInterceptor {
  
   intercept(req: HttpRequest<any>, next: HttpHandler){
       console.log('request is on its way');
-       letheader =  new HttpHeaders({
+       let header =  new HttpHeaders({
      'Access-Control-Allow-Origin': '*',
      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token' })
