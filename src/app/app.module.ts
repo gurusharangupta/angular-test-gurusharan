@@ -25,6 +25,7 @@ import { RecipeResolverService } from './recipe/recipe-resolver.service';
 import { AlertService } from './shared/alert.service';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './shared/auth-interceptor.service';
+import { AuthService } from './auth/auth.service';
 
 
 const appRoutes: Routes = [
@@ -54,7 +55,7 @@ const appRoutes: Routes = [
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
     RenderHighlightDirective, DropDownDirective, RecipeEditComponent, AuthComponent],
   bootstrap: [AppComponent],
-  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService,
+  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService,AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
