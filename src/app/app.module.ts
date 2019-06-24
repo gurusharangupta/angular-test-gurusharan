@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
@@ -23,18 +23,22 @@ import { RecipeService } from './recipe/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeResolverService } from './recipe/recipe-resolver.service';
 import { AlertService } from './shared/alert.service';
+import { AuthComponent } from './auth/auth.component';
+import { AuthInterceptorService } from './shared/auth-interceptor.service';
+
 
 const appRoutes: Routes = [
   { path: '', component: HelloComponent },
   {
     path: 'recipes', component: RecipesComponent, children: [
-      { path: 'new', component: RecipeEditComponent},
-       { path: ':id', component: RecipeDetailComponent, resolve :[RecipeResolverService] },
-      { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipeResolverService]}
+      { path: 'new', component: RecipeEditComponent },
+      { path: ':id', component: RecipeDetailComponent, resolve: [RecipeResolverService] },
+      { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipeResolverService] }
       ,
     ]
   },
-  { path: 'shopping', component: ShoppingListComponent }
+  { path: 'shopping', component: ShoppingListComponent },
+  { path: 'auth', component: AuthComponent }
 
 ]
 @NgModule({
@@ -48,8 +52,14 @@ const appRoutes: Routes = [
   declarations: [AppComponent, HelloComponent, HeaderComponent, RecipeListComponent,
     RecipeDetailComponent, RecipeItemComponent, RecipesComponent,
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
-    RenderHighlightDirective, DropDownDirective, RecipeEditComponent],
+    RenderHighlightDirective, DropDownDirective, RecipeEditComponent, AuthComponent],
   bootstrap: [AppComponent],
-  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService, ]
+  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+
+    }]
 })
 export class AppModule { }
