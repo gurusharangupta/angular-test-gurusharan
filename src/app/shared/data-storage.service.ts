@@ -48,15 +48,8 @@ export class DataStorageService {
 
   public fetchRecipes() {
     let token = null;
-    this.authService.user.pipe(take(1)).subscribe(user => {
-      token = user.token;
-    });
-    let searchParams = new HttpParams();
-    searchParams = searchParams.append('auth', token);
-    return this.http.get<Recipe[]>('https://test-backend-8118b.firebaseio.com/recipes.json',
-      {
-        params: searchParams
-      })
+    
+    return this.http.get<Recipe[]>('https://test-backend-8118b.firebaseio.com/recipes.json')
       .pipe(
         map(recipes => {
           return recipes.map(recipe => {

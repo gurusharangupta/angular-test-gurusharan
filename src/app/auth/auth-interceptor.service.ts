@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpHeaders } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
+import { tap, take, exhaustMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -9,16 +9,18 @@ export class AuthInterceptorService implements HttpInterceptor {
  constructor(private authService: AuthService){}
  
   intercept(req: HttpRequest<any>, next: HttpHandler){
-      console.log('request is on its way');
-       let header =  new HttpHeaders({
-     'Access-Control-Allow-Origin': '*',
-     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-     'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token' });
-      const modifiedRequest = req.clone({ headers: header})
-      return next.handle(modifiedRequest).pipe(
-        tap(events => {
-          console.log('modified response');
-        })
-      );
+    let token = null;
+    this.authService.user.pipe(take(1),
+    exhaustMap(user => {
+      console.log('aa raha hai');
+      if(!user){
+        return next.handle(req);
+      }
+   
+      const modifiedRequest = req.clone({ params: new HttpParams().set('auth', user.token)});
+      
+      return next.handle(modifiedRequest);
+    })
+    );
   }
 }
