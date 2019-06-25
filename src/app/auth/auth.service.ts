@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject } from 'rxjs';
 import { User } from './user.model';
 
@@ -45,7 +45,10 @@ login(email: string, password: string) {
       password: password,
       returnSecureToken: true
 
-    }).pipe(catchError(this.handleError));
+    }).pipe(catchError(this.handleError),tap( resData => {
+      const expirationDate = new Date(new Date().getTime() + resData)
+      const user = new User(resData.email, resData.localId, resData.idToken)
+    }));
 
 }
 
