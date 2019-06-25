@@ -40,7 +40,8 @@ const appRoutes: Routes = [
     ]
   },
   { path: 'shopping', component: ShoppingListComponent },
-  { path: 'auth', component: AuthComponent }
+  { path: 'auth', component: AuthComponent },
+   { path: '**', component: AuthComponent }
 
 ]
 @NgModule({

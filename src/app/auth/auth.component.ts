@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from './auth.service';
-import { AlertService, AuthResponseData } from '../shared/alert.service';
+import { AuthService, AuthResponseData} from './auth.service';
+
+
+import { AlertService } from '../shared/alert.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 

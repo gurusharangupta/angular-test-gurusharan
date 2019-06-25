@@ -16,8 +16,8 @@ export interface AuthResponseData {
 
 @Injectable()
 export class AuthService {
-  
-public userAuthenticated = new Subject<User>();
+  user = new Subject<User>();
+
   constructor(private http: HttpClient) { }
 
   signUp(email: string, password: string) {
@@ -45,15 +45,16 @@ public userAuthenticated = new Subject<User>();
         password: password,
         returnSecureToken: true
 
-      }).pipe(catchError(this.handleError), tap(this.handleAuthentication));
+      }).pipe(catchError(this.handleError), tap(resData => {
+        this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+      }));
 
   }
 
-  private handleAuthentication(resData: AuthResponseData) {
-    const expirationDate = new Date(new Date().getTime() + +resData.expiresIn + 1000)
-    const user = new User(resData.email, resData.localId, resData.idToken, expirationDate);
-    console.log(user);
-   this.userAuthenticated.next(user);
+  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn + 1000)
+    const user = new User(email, userId, token, expirationDate);
+    this.user.next(user);
   }
 
   private handleError(errorRes: HttpErrorResponse) {

@@ -3,14 +3,14 @@
 		<nav class="navbar navbar-default bg-light">
 			<div class="container-fluid">
 
-				<ul class="nav navbar-nav">
-					<li routerLinkActive="active" class="navbar-header" [routerLinkActiveOptions]="{exact: true}">
-						<a routerLink="/auth" class="navbar-brand" (click)="onRecipeClick()">
+				<ul class="nav navbar-nav navbar-left">
+					<li routerLinkActive="active" class="navbar-header">
+						<a class="navbar-brand">
 							<label for="" appRenderHighlight>Punjabi Tadka</label>
               </a>
            </li>
           <li routerLinkActive="active">
-            <a routerLink="/recipes" (click)="onRecipeClick()">
+            <a routerLink="/recipes" (click)="onRecipeClick()" *ngIf="isAuthenticated">
               Recipes
             </a>
            </li>
@@ -20,7 +20,7 @@
              </a>
           </li>
            <li class="nav-item dropdown" appDropDown>
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="isAuthenticated">
           Manage<span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -29,6 +29,19 @@
        <li><a style="cursor: pointer;" (click)="resetRecipe()">Reset Data</a></li>
     </ul>
       </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+     <li routerLinkActive="active" class="navbar-header" >
+						<a routerLink="/auth" class="navbar-brand" (click)="onRecipeClick()" *ngIf="!isAuthenticated">
+							<label for="login">Login</label>
+              </a>
+           </li>
+					<li>
+						<a style="cursor: pointer;"  class="navbar-brand" *ngIf="isAuthenticated">
+						<label for="logout">Logout</label>
+              </a>
+           </li>
     </ul>
     
  </div>

@@ -3,6 +3,7 @@ import { Component, OnInit, Output, OnDestroy } from '@angular/core';
 import { DataStorageService } from '../shared/data-storage.service';
 import { AlertService } from '../shared/alert.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -14,11 +15,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   statusMessage: string = '';
   status: string = '';
   alertType: string = 'alert ';
-  subscription: Subscription
-  constructor(private dataStorgeService: DataStorageService, private alertService: AlertService) { }
+  alertSubscription: Subscription;
+  userSubscription: Subscription;
+  isAuthenticated = false;
+  constructor(private dataStorgeService: DataStorageService, private alertService: AlertService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.subscription = this.alertService.showAlert.subscribe(
+    this.userSubscription = this.authService.user.subscribe( user => {
+this.isAuthenticated = !user ? false: true;
+    });
+    this.alertSubscription = this.alertService.showAlert.subscribe(
       (alert) => {
 
         this.statusMessage = alert.message;
@@ -54,7 +60,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.alertSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
   hideAlert() {
     this.status = '';
