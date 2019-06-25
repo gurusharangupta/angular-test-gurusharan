@@ -52,7 +52,9 @@ export class AuthService {
   }
 
   private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn + 1000)
+    console.log(expiresIn);
+    const expirationDate = new Date(new Date().getTime() + expiresIn + 10000);
+    console.log(expirationDate);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
   }
