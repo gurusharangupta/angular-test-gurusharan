@@ -24,7 +24,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeResolverService } from './recipe/recipe-resolver.service';
 import { AlertService } from './shared/alert.service';
 import { AuthComponent } from './auth/auth.component';
-import { AuthInterceptorService } from './shared/auth-interceptor.service';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthService } from './auth/auth.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
@@ -41,7 +41,7 @@ const appRoutes: Routes = [
   },
   { path: 'shopping', component: ShoppingListComponent },
   { path: 'auth', component: AuthComponent },
-   { path: '**', component: AuthComponent }
+  { path: '**', component: AuthComponent }
 
 ]
 @NgModule({
@@ -57,7 +57,7 @@ const appRoutes: Routes = [
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
     RenderHighlightDirective, DropDownDirective, RecipeEditComponent, AuthComponent, LoadingSpinnerComponent],
   bootstrap: [AppComponent],
-  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService,AuthService,
+  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService, AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

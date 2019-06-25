@@ -38,7 +38,7 @@
               </a>
            </li>
 					<li>
-						<a style="cursor: pointer;"  class="navbar-brand" *ngIf="isAuthenticated">
+						<a style="cursor: pointer;"  class="navbar-brand" *ngIf="isAuthenticated"(click)="onLogout()">
 						<label for="logout">Logout</label>
               </a>
            </li>

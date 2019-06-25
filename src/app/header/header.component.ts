@@ -4,6 +4,7 @@ import { DataStorageService } from '../shared/data-storage.service';
 import { AlertService } from '../shared/alert.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,11 +19,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   alertSubscription: Subscription;
   userSubscription: Subscription;
   isAuthenticated = false;
-  constructor(private dataStorgeService: DataStorageService, private alertService: AlertService, private authService: AuthService) { }
+  constructor(private dataStorgeService: DataStorageService, private alertService: AlertService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.userSubscription = this.authService.user.subscribe( user => {
-this.isAuthenticated = !user ? false: true;
+    this.userSubscription = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !user ? false : true;
     });
     this.alertSubscription = this.alertService.showAlert.subscribe(
       (alert) => {
@@ -67,6 +68,9 @@ this.isAuthenticated = !user ? false: true;
     this.status = '';
     this.alertType = 'alert ';
   }
-
+  onLogout() {
+    this.authService.user.next(null);
+    this.router.navigate(['/auth']);
+  }
 
 }
