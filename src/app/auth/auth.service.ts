@@ -16,60 +16,64 @@ export interface AuthResponseData {
 
 @Injectable()
 export class AuthService {
-  user = new Subject<User>();
+  
+public userAuthenticated = new Subject<User>();
+  constructor(private http: HttpClient) { }
 
-constructor(private http: HttpClient) { }
+  signUp(email: string, password: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Content-Type': 'application/json'
 
-signUp(email: string, password: string) {
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<AuthResponseData>('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBUhRZwz4CVDoBjYfw-ldzCILvu1rn-PDI',
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true
 
-    })
-  };
-  return this.http.post<AuthResponseData>('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBUhRZwz4CVDoBjYfw-ldzCILvu1rn-PDI',
-    {
-      email: email,
-      password: password,
-      returnSecureToken: true
+      }).pipe(catchError(this.handleError));
+  }
 
-    }).pipe(catchError(this.handleError));
-}
+  login(email: string, password: string) {
+    return this.http.post<AuthResponseData>('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBUhRZwz4CVDoBjYfw-ldzCILvu1rn-PDI',
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true
 
-login(email: string, password: string) {
-  return this.http.post<AuthResponseData>('https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBUhRZwz4CVDoBjYfw-ldzCILvu1rn-PDI',
-    {
-      email: email,
-      password: password,
-      returnSecureToken: true
+      }).pipe(catchError(this.handleError), tap(this.handleAuthentication));
 
-    }).pipe(catchError(this.handleError),tap( resData => {
-      const expirationDate = new Date(new Date().getTime() + resData)
-      const user = new User(resData.email, resData.localId, resData.idToken)
-    }));
+  }
 
-}
+  private handleAuthentication(resData: AuthResponseData) {
+    const expirationDate = new Date(new Date().getTime() + +resData.expiresIn + 1000)
+    const user = new User(resData.email, resData.localId, resData.idToken, expirationDate);
+    console.log(user);
+   this.userAuthenticated.next(user);
+  }
 
   private handleError(errorRes: HttpErrorResponse) {
 
-  let errorMessage = 'An unknown error has occured';
-  console.log(errorRes.error.error.message);
-  if (!errorRes.error || !errorRes.error.error) return throwError(errorMessage);
-  switch (errorRes.error.error.message) {
-    case 'EMAIL_EXISTS':
-      errorMessage = 'This email exists already';
-      break;
+    let errorMessage = 'An unknown error has occured';
+    console.log(errorRes.error.error.message);
+    if (!errorRes.error || !errorRes.error.error) return throwError(errorMessage);
+    switch (errorRes.error.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email exists already';
+        break;
 
-    case 'EMAIL_NOT_FOUND':
-      errorMessage = 'This email is not registered';
-      break;
+      case 'EMAIL_NOT_FOUND':
+        errorMessage = 'This email is not registered';
+        break;
 
-    case 'INVALID_PASSWORD':
-      errorMessage = 'This email and password do not match';
-      break;
+      case 'INVALID_PASSWORD':
+        errorMessage = 'This email and password do not match';
+        break;
+    }
+    return throwError(errorMessage);
   }
-  return throwError(errorMessage);
-}
 }
