@@ -26,6 +26,7 @@ import { AlertService } from './shared/alert.service';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './shared/auth-interceptor.service';
 import { AuthService } from './auth/auth.service';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 
 const appRoutes: Routes = [
@@ -53,7 +54,7 @@ const appRoutes: Routes = [
   declarations: [AppComponent, HelloComponent, HeaderComponent, RecipeListComponent,
     RecipeDetailComponent, RecipeItemComponent, RecipesComponent,
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
-    RenderHighlightDirective, DropDownDirective, RecipeEditComponent, AuthComponent],
+    RenderHighlightDirective, DropDownDirective, RecipeEditComponent, AuthComponent, LoadingSpinnerComponent],
   bootstrap: [AppComponent],
   providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService,AuthService,
     {

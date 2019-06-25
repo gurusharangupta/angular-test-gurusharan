@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService }from './auth.service';
+import { AuthService } from './auth.service';
+import { AlertService, AuthResponseData } from '../shared/alert.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -9,7 +11,8 @@ import { AuthService }from './auth.service';
 })
 export class AuthComponent implements OnInit {
   isLoginMode = false;
-  constructor(private authService: AuthService) { }
+  isLoading = false;
+  constructor(private authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -20,23 +23,33 @@ export class AuthComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
-    if(!form.valid){
+    if (!form.valid) {
       return;
     }
+    this.isLoading = true
     const email = form.value.email;
     const password = form.value.password;
-    if(this.isLoginMode){
+    let authObs: Observable<AuthResponseData>;
 
-    }else{
-      this.authService.signUp(email,password).subscribe(
-        resData => {
-          console.log(resData);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    if (this.isLoginMode) {
+    authObs =  this.authService.login(email, password);
+    } else {
+    authObs =  this.authService.signUp(email, password);
     }
+
+    authObs.subscribe(
+      resData => {
+        this.isLoading = false;
+        console.log(resData);
+      },
+      errorMessage => {
+        this.alertService.setAlert('Error', errorMessage);
+        this.isLoading = false;
+
+      }
+    );
+
+    form.reset();
   }
 
 }
