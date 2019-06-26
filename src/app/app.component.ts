@@ -1,7 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { LoggingService } from './shared/logging.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeService } from './recipe/recipe.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'my-app',
@@ -10,10 +11,13 @@ import { RecipeService } from './recipe/recipe.service';
   encapsulation: ViewEncapsulation.None,
   providers: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   loadPage = 'Recipe';
 
-  constructor(private logging: LoggingService) { }
+  ngOnInit() {
+    this.authService.autoLogin();
+  }
+  constructor(private logging: LoggingService, private authService: AuthService) { }
 
   onPageClick(page: string) {
     this.loadPage = page;

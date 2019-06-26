@@ -57,12 +57,13 @@ export class AuthService {
     }
 
     const loadedUser = new User(userData.email,userData.id,userData._token,new Date(userData._tokenExpirationDate));
+    this.user.next(loadedUser);
   }
 
   logout(){
     this.user.next(null);
+    localStorage.removeItem('userData');    
     this.router.navigate(['/auth']);
-
   }
 
   private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {

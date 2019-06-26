@@ -27,12 +27,13 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthService } from './auth/auth.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 
 const appRoutes: Routes = [
   { path: '', component: HelloComponent },
   {
-    path: 'recipes', component: RecipesComponent, children: [
+    path: 'recipes', component: RecipesComponent,canActivate: [AuthGuardService], children: [
       { path: 'new', component: RecipeEditComponent },
       { path: ':id', component: RecipeDetailComponent, resolve: [RecipeResolverService] },
       { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipeResolverService] }
@@ -57,11 +58,12 @@ const appRoutes: Routes = [
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
     RenderHighlightDirective, DropDownDirective, RecipeEditComponent, AuthComponent, LoadingSpinnerComponent],
   bootstrap: [AppComponent],
-  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService, AuthService,
+  providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService, AuthService, AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
+
 
     }]
 })
