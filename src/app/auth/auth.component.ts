@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService, AuthResponseData} from './auth.service';
 
 
-import { AlertService } from '../shared/alert.service';
+import { AlertService } from '../shared/alert/alert.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 

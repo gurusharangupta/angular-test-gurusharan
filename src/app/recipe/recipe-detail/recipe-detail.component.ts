@@ -2,7 +2,7 @@ import { RecipeService } from './../recipe.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AlertService } from '../../shared/alert.service';
+import { AlertService } from '../../shared/alert/alert.service';
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',

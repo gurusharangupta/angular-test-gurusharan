@@ -22,12 +22,13 @@ import { DataStorageService } from './shared/data-storage.service';
 import { RecipeService } from './recipe/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeResolverService } from './recipe/recipe-resolver.service';
-import { AlertService } from './shared/alert.service';
+import { AlertService } from './shared/alert/alert.service';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthService } from './auth/auth.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { AlertComponent } from './shared/alert/alert.component';
 
 
 const appRoutes: Routes = [
@@ -56,7 +57,7 @@ const appRoutes: Routes = [
   declarations: [AppComponent, HelloComponent, HeaderComponent, RecipeListComponent,
     RecipeDetailComponent, RecipeItemComponent, RecipesComponent,
     ShoppingListComponent, ShoppingEditComponent, HighlightDirective,
-    RenderHighlightDirective, DropDownDirective, RecipeEditComponent, AuthComponent, LoadingSpinnerComponent],
+    RenderHighlightDirective, DropDownDirective, RecipeEditComponent, AuthComponent, LoadingSpinnerComponent, AlertComponent],
   bootstrap: [AppComponent],
   providers: [AlertService, LoggingService, DataStorageService, ShoppingListService, RecipeService, RecipeResolverService, AuthService, AuthGuardService,
     {

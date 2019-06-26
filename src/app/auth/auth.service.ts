@@ -19,10 +19,10 @@ export interface AuthResponseData {
 export class AuthService {
   user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient,private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   signUp(email: string, password: string) {
-    
+
     return this.http.post<AuthResponseData>('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBUhRZwz4CVDoBjYfw-ldzCILvu1rn-PDI',
       {
         email: email,
@@ -45,24 +45,24 @@ export class AuthService {
 
   }
 
-  autoLogin(){
-    const userData:{
+  autoLogin() {
+    const userData: {
       email: string,
       id: string,
       _token: string,
       _tokenExpirationDate: string
     } = JSON.parse(localStorage.getItem('userData'));
-    if(!userData){
+    if (!userData) {
       return;
     }
 
-    const loadedUser = new User(userData.email,userData.id,userData._token,new Date(userData._tokenExpirationDate));
+    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
     this.user.next(loadedUser);
   }
 
-  logout(){
+  logout() {
     this.user.next(null);
-    localStorage.removeItem('userData');    
+    localStorage.removeItem('userData');
     this.router.navigate(['/auth']);
   }
 
@@ -72,7 +72,7 @@ export class AuthService {
     console.log(expirationDate);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
-    localStorage.setItem('userData',JSON.stringify(user));
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 
   private handleError(errorRes: HttpErrorResponse) {

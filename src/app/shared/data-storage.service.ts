@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { RecipeService } from '../recipe/recipe.service';
 import { Recipe } from '../recipe/recipe.model';
 import { map, tap, take, exhaustMap } from 'rxjs/operators';
-import { AlertService } from './alert.service';
+import { AlertService } from './alert/alert.service';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable()
