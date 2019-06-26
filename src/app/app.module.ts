@@ -29,30 +29,18 @@ import { AuthService } from './auth/auth.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { AlertComponent } from './shared/alert/alert.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
-const appRoutes: Routes = [
-  { path: '', component: HelloComponent },
-  {
-    path: 'recipes', component: RecipesComponent,canActivate: [AuthGuardService], children: [
-      { path: 'new', component: RecipeEditComponent },
-      { path: ':id', component: RecipeDetailComponent, resolve: [RecipeResolverService] },
-      { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipeResolverService] }
-      ,
-    ]
-  },
-  { path: 'shopping', component: ShoppingListComponent },
-  { path: 'auth', component: AuthComponent },
-  { path: '**', component: AuthComponent }
 
-]
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
+   
   ],
   declarations: [AppComponent, HelloComponent, HeaderComponent, RecipeListComponent,
     RecipeDetailComponent, RecipeItemComponent, RecipesComponent,
