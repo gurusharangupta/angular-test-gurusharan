@@ -11,13 +11,13 @@ export class AlertComponent implements OnInit {
 
   alertType: string = 'alert ';
   alertSubscription: Subscription;
-   statusMessage: string = '';
+  statusMessage: string = '';
   status: string = '';
   constructor(private alertService: AlertService) { }
 
   ngOnInit() {
 
-      this.alertSubscription = this.alertService.showAlert.subscribe(
+    this.alertSubscription = this.alertService.showAlert.subscribe(
       (alert) => {
 
         this.statusMessage = alert.message;
@@ -30,7 +30,7 @@ export class AlertComponent implements OnInit {
   }
 
 
-    ngOnDestroy() {
+  ngOnDestroy() {
     this.alertSubscription.unsubscribe();
   }
   hideAlert() {
